@@ -30,7 +30,7 @@ const getState = ({ getStore, setStore }) => {
 			// let url = "https://assets.breatheco.de/apis/fake/contact/"
 
 			// Fetch ContactList
-			// getContacts: () => {
+			// getContacts: async () => {
 			// 	console.log("---Flux Get Contacts---");
 			// 	const config = {
 			// 		method: "GET",
@@ -38,11 +38,11 @@ const getState = ({ getStore, setStore }) => {
 			// 			"Content-type": "application/json"
 			// 		}
 			// 	};
-			// 	const response = fetch("https://assets.breatheco.de/apis/fake/contact/agenda/alejo", config);
-			// 	const json = response.json();
+			// 	const response = await fetch("https://assets.breatheco.de/apis/fake/contact/agenda/alejo", config);
+			// 	const json = await response.json();
 			// 	console.log("--json-allContacts--", json);
 			// 	setStore({ allContacts: json.results });
-			// 	console.log("todos los contactos", allContacts);
+			// 	//console.log("todos los contactos", allContacts);
 			// }
 
 			getContacts: () => {
@@ -56,7 +56,7 @@ const getState = ({ getStore, setStore }) => {
 				fetch("https://assets.breatheco.de/apis/fake/contact/agenda/alejo", config)
 					.then(response => response.json())
 					.then(data => {
-						console.log(data);
+						console.log("--json-allContacts--", data);
 						setStore({ allContacts: data });
 					})
 					.catch(error => console.log(error));
