@@ -46,8 +46,8 @@ export const Contacts = () => {
 				</div>
 				<Modal
 					show={state.showModal}
-					onClose={() => setState({ showModal: false, idDeleteContact: null })}
-					idDeleteContact={state.idDeleteContact}
+					onClose={() => setState({ showModal: false })}
+					idToDelete={state.idDeleteContact}
 				/>
 			</div>
 		</>

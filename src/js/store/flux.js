@@ -2,49 +2,70 @@ const getState = ({ getStore, setStore }) => {
 	return {
 		store: {
 			//Your data structures, A.K.A Entities
-			allContacts: [],
-			singleContact: {}
+			allContacts: []
 		},
 		actions: {
-			//(Arrow) Functions that update the Store
-			// Remember to use the scope: scope.state.store & scope.setState()
-			// fetchContacts: async (id = null) => {
-			// 	let url = "https://assets.breatheco.de/apis/fake/contact/agenda/alejo";
-			// 	if (id != null) {
-			// 		url += "/" + id;
-			// 		console.log("Link", url);
-			// 	}
-			// 	let res = await fetch(url);
-			// 	if (res.ok) {
-			// 		let body = await res.json();
-			// 		if (id == null) {
-			// 			setStore({ contacts: body });
-			// 		}
-			// 		return true;
-			// 	} else {
-			// 		console.log(res.status);
-			// 		return false;
-			// 	}
-			// },
-			// para los metodos post y put
-			// let url = "https://assets.breatheco.de/apis/fake/contact/"
-
-			// Fetch ContactList
-			// getContacts: async () => {
-			// 	console.log("---Flux Get Contacts---");
-			// 	const config = {
-			// 		method: "GET",
-			// 		headers: {
-			// 			"Content-type": "application/json"
-			// 		}
-			// 	};
-			// 	const response = await fetch("https://assets.breatheco.de/apis/fake/contact/agenda/alejo", config);
-			// 	const json = await response.json();
-			// 	console.log("--json-allContacts--", json);
-			// 	setStore({ allContacts: json.results });
-			// 	//console.log("todos los contactos", allContacts);
-			// }
-
+			// Agregar un nuevo Contacto a la Agenda
+			addContacts: (name, address, phone, email) => {
+				fetch("https://assets.breatheco.de/apis/fake/contact/", {
+					method: "POST",
+					headers: { "Content-Type": "application/json" },
+					body: JSON.stringify({
+						full_name: name,
+						email,
+						agenda_slug: "alejo",
+						address,
+						phone
+					})
+				})
+					.then(data => data.json().then(response => ({ status: data.status, resMsg: response.msg })))
+					.then(({ status, resMsg }) => {
+						if (status === 400) alert(resMsg);
+					})
+					.catch(err => alert(err.message));
+			},
+			// Eliminar un Contacto de la Agenda
+			delContacts: idToDelete => {
+				console.log("---Flux Delete Contact---");
+				fetch(`https://assets.breatheco.de/apis/fake/contact/${idToDelete}`, {
+					method: "DELETE",
+					headers: { "Content-Type": "application/json" }
+				})
+					.then(res => res.json())
+					.then(() => {
+						fetch("https://assets.breatheco.de/apis/fake/contact/agenda/alejo")
+							.then(red => red.json())
+							.then(data => setStore({ allContacts: data }));
+					})
+					.catch(err => alert(err.message));
+			},
+			// Cambiar valores de un Contacto de la Agenda
+			editContacts: (name, address, phone, email, idToEdit) => {
+				fetch(`https://assets.breatheco.de/apis/fake/contact/${idToEdit}`, {
+					method: "PUT",
+					headers: {
+						"Content-Type": "application/json"
+					},
+					body: JSON.stringify({
+						agenda_slug: "alejo",
+						full_name: name,
+						email,
+						address,
+						phone
+					})
+				})
+					.then(data => data.json().then(response => ({ status: data.status, resMsg: response.msg })))
+					.then(({ status, resMsg }) => {
+						if (status === 400) alert(resMsg);
+					})
+					.then(() => {
+						fetch("https://assets.breatheco.de/apis/fake/contact/agenda/alejo")
+							.then(res => res.json())
+							.then(data => setStore({ allContacts: data }));
+					})
+					.catch(err => alert(err.message));
+			},
+			// Obtener de la API todos los Contactos de la Agenda
 			getContacts: () => {
 				console.log("---Flux Get Contacts---");
 				const config = {

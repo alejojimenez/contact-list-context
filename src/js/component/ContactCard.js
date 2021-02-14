@@ -3,9 +3,9 @@ import { Context } from "../store/appContext";
 import { withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
 import MikePhoto from "../../img/m102.jpg";
+import { EditContact } from "../views/EditContact";
 
-export const ContactCard = (props, contact, onDelete) => {
-	console.log("Iterada Contact en Component ContactCard", contact);
+export const ContactCard = props => {
 	console.log("props en Component ContactCard", props);
 	const [state, setState] = useState({
 		//initialize state here
@@ -20,7 +20,7 @@ export const ContactCard = (props, contact, onDelete) => {
 				</div>
 				<div className="col-12 col-sm-6 col-md-9 text-center text-sm-left">
 					<div className=" float-right">
-						<button className="btn">
+						<button className="btn" onClick={() => <EditContact />}>
 							<i className="fas fa-pencil-alt mr-3" />
 						</button>
 						<button className="btn" onClick={() => props.onDelete()}>
