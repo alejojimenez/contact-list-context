@@ -7,6 +7,7 @@ const getState = ({ getStore, setStore }) => {
 		actions: {
 			// Agregar un nuevo Contacto a la Agenda
 			addContacts: (name, address, phone, email) => {
+				console.log("---Flux add - Put Contact---");
 				fetch("https://assets.breatheco.de/apis/fake/contact/", {
 					method: "POST",
 					headers: { "Content-Type": "application/json" },
