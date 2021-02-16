@@ -4,6 +4,7 @@ import { Context } from "../store/appContext";
 import PropTypes from "prop-types";
 
 export const AddContact = props => {
+	console.log("props en Component AddContact", props);
 	const [state, setState] = useState({
 		name: null,
 		address: null,

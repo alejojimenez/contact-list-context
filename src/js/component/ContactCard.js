@@ -1,12 +1,14 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Context } from "../store/appContext";
 import { withRouter } from "react-router-dom";
+import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import MikePhoto from "../../img/m102.jpg";
 import { EditContact } from "../views/EditContact";
 
 export const ContactCard = props => {
 	console.log("props en Component ContactCard", props);
+	//console.log("props en Component ContactCard id Edit", idEditContact);
 	const [state, setState] = useState({
 		//initialize state here
 	});
@@ -20,9 +22,15 @@ export const ContactCard = props => {
 				</div>
 				<div className="col-12 col-sm-6 col-md-9 text-center text-sm-left">
 					<div className=" float-right">
-						<button className="btn" to="/edit">
+						<Link className="btn" to={"/edit/" + props.id}>
 							<i className="fas fa-pencil-alt mr-3" />
-						</button>
+						</Link>
+						{/* <button className="btn" to={"/edit/" + props.id}>
+							<i className="fas fa-pencil-alt mr-3" />
+						</button> */}
+						{/* <button className="btn" onClick={() => `/edit/${props.id}`}>
+							<i className="fas fa-pencil-alt mr-3" />
+						</button> */}
 						<button className="btn" onClick={() => props.onDelete()}>
 							<i className="fas fa-trash-alt" />
 						</button>
@@ -60,6 +68,7 @@ export const ContactCard = props => {
 ContactCard.propTypes = {
 	history: PropTypes.object,
 	onDelete: PropTypes.func,
+	onEdit: PropTypes.func,
 	index: PropTypes.number,
 	name: PropTypes.string,
 	address: PropTypes.string,

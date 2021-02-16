@@ -8,7 +8,8 @@ import { Context } from "../store/appContext.js";
 export const Contacts = () => {
 	const [state, setState] = useState({
 		showModal: false,
-		idDeleteContact: null
+		idDeleteContact: null,
+		idEditContact: null
 	});
 	const { store, actions } = useContext(Context);
 
@@ -39,6 +40,7 @@ export const Contacts = () => {
 									index={index}
 									id={item.id}
 									onDelete={() => setState({ showModal: true, idDeleteContact: item.id })}
+									onEdit={() => setState({ idEditContact: item.id })}
 								/>
 							))}
 						</ul>
