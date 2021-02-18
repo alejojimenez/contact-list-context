@@ -1,17 +1,17 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Context } from "../store/appContext";
-import { withRouter } from "react-router-dom";
+//import { withRouter } from "react-router-dom";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import MikePhoto from "../../img/m102.jpg";
-import { EditContact } from "../views/EditContact";
+//import { EditContact } from "../views/EditContact";
 
 export const ContactCard = props => {
 	console.log("props en Component ContactCard", props);
 	//console.log("props en Component ContactCard id Edit", idEditContact);
-	const [state, setState] = useState({
-		//initialize state here
-	});
+	// const [state, setState] = useState({
+	// 	//initialize state here
+	// });
 	const { store, actions } = useContext(Context);
 
 	return (
@@ -25,12 +25,6 @@ export const ContactCard = props => {
 						<Link className="btn" to={"/edit/" + props.id}>
 							<i className="fas fa-pencil-alt mr-3" />
 						</Link>
-						{/* <button className="btn" to={"/edit/" + props.id}>
-							<i className="fas fa-pencil-alt mr-3" />
-						</button> */}
-						{/* <button className="btn" onClick={() => `/edit/${props.id}`}>
-							<i className="fas fa-pencil-alt mr-3" />
-						</button> */}
 						<button className="btn" onClick={() => props.onDelete()}>
 							<i className="fas fa-trash-alt" />
 						</button>

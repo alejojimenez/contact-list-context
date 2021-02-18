@@ -4,6 +4,7 @@ import { Context } from "../store/appContext";
 import PropTypes from "prop-types";
 
 export const AddContact = props => {
+	const { actions, store } = useContext(Context);
 	console.log("props en Component AddContact", props);
 	const [state, setState] = useState({
 		name: null,
@@ -11,8 +12,6 @@ export const AddContact = props => {
 		phone: null,
 		email: null
 	});
-
-	const { store, actions } = useContext(Context);
 
 	return (
 		<div className="container">
@@ -66,6 +65,7 @@ export const AddContact = props => {
 					<button
 						onClick={() => {
 							actions.addContacts(state.name, state.address, state.phone, state.email);
+							props.history.push("/");
 						}}
 						type="button"
 						className="btn btn-primary form-control">
@@ -78,4 +78,9 @@ export const AddContact = props => {
 			</div>
 		</div>
 	);
+};
+
+AddContact.propTypes = {
+	match: PropTypes.object,
+	history: PropTypes.object
 };
