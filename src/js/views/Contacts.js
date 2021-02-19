@@ -1,6 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
-
 import { ContactCard } from "../component/ContactCard.js";
 import { Modal } from "../component/Modal";
 import { Context } from "../store/appContext.js";
@@ -16,8 +15,6 @@ export const Contacts = () => {
 	useEffect(() => {
 		actions.getContacts();
 	}, []);
-
-	console.log("Entrando a Contacts en component Constacts", store.allContacts);
 
 	return (
 		<>

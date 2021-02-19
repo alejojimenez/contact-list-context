@@ -16,7 +16,7 @@ export const EditContact = props => {
 		} else {
 			setDisabledButton(true);
 		}
-	}, [state]); // reloads the page every time the state changes
+	}, [state]);
 
 	return (
 		<div className="container">

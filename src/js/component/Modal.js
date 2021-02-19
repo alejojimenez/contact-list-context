@@ -5,10 +5,7 @@ import PropTypes from "prop-types";
 
 export const Modal = props => {
 	console.log("props en Component Modal", props);
-	const [state, setState] = useState({
-		// 	//initialize state here
-	});
-	const { store, actions } = useContext(Context);
+	const { actions } = useContext(Context);
 
 	return (
 		<div className="modal" tabIndex="-1" role="dialog" style={{ display: props.show ? "inline-block" : "none" }}>
@@ -40,7 +37,10 @@ export const Modal = props => {
 							type="button"
 							className="btn btn-success"
 							data-dismiss="modal"
-							onClick={() => actions.delContacts(props.idToDelete)}>
+							onClick={() => {
+								actions.delContacts(props.idToDelete);
+								props.onClose();
+							}}>
 							Do it!
 						</button>
 					</div>
